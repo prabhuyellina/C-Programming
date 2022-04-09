@@ -1,2 +1,2 @@
-# Python-Training
+# C Programming
 Pratice Examples
