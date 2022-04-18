@@ -1,8 +1,4 @@
-/* Problem: Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
-
-There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.
-
-Do not modify the linked list. */
+/* Reference: https://www.youtube.com/watch?v=PvrxZaH_eZ4 */
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -11,22 +7,28 @@ Do not modify the linked list. */
  * };
  */
 struct ListNode *detectCycle(struct ListNode *head) {
+    /* handle one or no nodes*/
     if(!head || !head->next)return NULL;
+    /* Handle 2 nodes */
     if(head->next->next==head) return head;
     struct ListNode *slow =head, *fast=head;
     int met=0;
     while(fast && fast->next){
+        /* Traverse till fast and slow pointer meets */
         if(met==0){
         slow=slow->next;
         fast=fast->next->next;
         }
+        /* if slow and fast mets, increment both pointers by one node */
         if(met==1){
         slow=slow->next;
         fast=fast->next;
         }
+        /* slow and mets second time return the slow or fast */
         if(slow==fast){
             if(met==1)return slow;
             met=1;
+            /* set slow to head if slow and fast already mets */
             slow=head;
         }
     }
